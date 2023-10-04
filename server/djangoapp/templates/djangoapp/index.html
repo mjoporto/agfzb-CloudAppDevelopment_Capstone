@@ -15,31 +15,38 @@
 
     <body>
     <!--Add a nav bar here -->
+  
     <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="navbar-header">
-            <li class="nav-item">
-                  <a class="navbar-brand" href="#">Main</a>
-            </li>
+        <div class="container">
 
-            <li class="nav-item">
-            <a class="navbar-brand" href="{% url 'djangoapp:about' %}">About</a>
-            </li>
-            <li class="nav-item">
-            <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">Contact</a>
-            </li>
-            </div>
-                  <ul class="nav navbar-nav navbar-right">
+
+            <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                <div class="container-fluid">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Dealership Review</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'djangoapp:about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact</a>
+                    </li> 
+                </div>
+      
+           
+                  
                     {% if user.is_authenticated %}
+                    <div class="input-group">
                     <li>
                         <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
-                        <a class="btn btn-link">Logout</a>
+                        <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
                     </li>
                     {% else %}
                     <li>
-                        <form class="form-inline"  method="post">
+                        <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                             {% csrf_token %}
-                            <div class="input-group">
+                            
                                 <input type="text" class="form-control" placeholder="Username" name="username" >
                                 <input type="password" class="form-control" placeholder="Password" name="psw" >
                                 <button class="btn btn-primary" type="submit">Login</button>
