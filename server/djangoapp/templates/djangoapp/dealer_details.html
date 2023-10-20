@@ -71,7 +71,7 @@
                     </div>
                     <div class="card-footer text-center" style="min-height: 74px;">
                         {% if user.is_authenticated %}
-      
+                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a Review!</a>
                         {% else %}
                             <p class="btn btn-success nohover">Please login to write a review!</p>
                         {% endif %}
