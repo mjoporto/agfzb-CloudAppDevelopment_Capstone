@@ -16,16 +16,27 @@ logger = logging.getLogger(__name__)
 
 
 # Create your views here.
-def get_dealerships(request):
+#def get_dealerships(request):
   #  context = {}
-   if request.method == "GET":
-    url = "https://us-south.functions.appdomain.cloud/api/v1/web/f7eef718-affe-45b0-b6fc-6de4b624888f/dealership-package/get-dealership"
+   #if request.method == "GET":
+   # url = "https://us-south.functions.appdomain.cloud/api/v1/web/f7eef718-affe-45b0-b6fc-6de4b624888f/dealership-package/get-dealership"
         # Get dealers from the URL
-    dealerships = get_dealers_from_cf(url)
+   # dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
-    dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
+   # dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
         # Return a list of dealer short name
-    return HttpResponse(dealer_names)
+   # return HttpResponse(dealer_names)
+
+
+def get_dealerships(request):
+    if request.method == "GET":
+        context = {}
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/f7eef718-affe-45b0-b6fc-6de4b624888f/dealership-package/get-dealership"
+        # Get dealers from the URL
+        dealerships = get_dealers_from_cf(url)
+        context["dealership_list"] = dealerships
+        return render(request, 'djangoapp/index.html', context)
+
 
 # Create an `about` view to render a static about page
 def about(request):
@@ -76,6 +87,9 @@ def logout_request(request):
 def registration_request(request):
     return render(request,'djangoapp/registration.html')
 
+
+#user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,
+                   # password=password)
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 #def get_dealerships(request):
   #  context = {}
