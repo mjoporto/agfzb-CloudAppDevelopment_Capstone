@@ -16,8 +16,10 @@ class CarModel(models.Model):
     car_choices = (('Sedan', 'Sedan'), ('SUV', "SUV"), ('WAGON', 'WAGON'),
                    ("Coupe", "Coupe"), ("Van", "Van"), ("Pickup", "Pickup"))
 
+    #make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
+    #dealer_id = models.IntegerField()
     make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-    dealer_id = models.IntegerField()
+    id = models.IntegerField(default=1,primary_key=True)
     name = models.CharField(max_length=50)
     car_types = models.CharField(
         max_length=50, choices=car_choices, default=car_choices[1])
@@ -27,7 +29,7 @@ class CarModel(models.Model):
         return "Name: " + self.name + \
             " Make Name: " + self.make.name + \
             " Type: " + self.car_types + \
-            " Dealer ID: " + str(self.dealer_id) + \
+            " Dealer ID: " + str(self.id) + \
             " Year: " + str(self.year)
 
 
@@ -49,22 +51,15 @@ class CarDealer:
 
 
 class DealerReview:
-    def __init__(self, id, dealership, name, purchase, review):
-        self.id = id
+    def __init__(self, dealership, name, purchase, review, purchase_date, car_make, car_model, car_year, sentiment, id):
         self.dealership = dealership
         self.name = name
         self.purchase = purchase
         self.review = review
-
-    def set_purchase_details(self, purchase_date, car_make, car_model, car_year):
-        self.purchase_date = purchase_date
-        self.car_make = car_make
-        self.car_model = car_model
-        self.car_year = car_year
-        self.sentiment = sentiment
-
-    def __str__(self):
-        return "Review: " + self.review
-
-
+        self.purchase_date = ""
+        self.car_make = ""
+        self.car_model = ""
+        self.car_year = ""
+        self.sentiment = ""
+        self.id = ""
     
