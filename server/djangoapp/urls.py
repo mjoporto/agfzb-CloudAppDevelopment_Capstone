@@ -10,7 +10,7 @@ urlpatterns = [
     # view refers to the view function
     # name the URL
   #  path(route='', view=views.get_dealerships, name='index'),
-   path('addreview/<int:dealer_id>/', views.add_review, name="add_review"),
+   path('addreview/<int:id>/', views.add_review, name="add_review"),
    path('dealer/<int:id>/', views.get_dealer_details, name='dealer_details'),
  path('dealer/<int:id>/review', views.add_review, name='add_review'),
    path(route='about/', view=views.about, name='about'),
