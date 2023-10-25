@@ -26,9 +26,6 @@
 
 
 
-
-
-
 <body>
     <!--Add a nav bar here -->
 <nav class="navbar navbar-light bg-light">
@@ -41,7 +38,10 @@
             <li>
                 <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
                 <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
-                <a class="btn btn-link" href="{% url 'djangoapp:add_review' id%}">Add Review</a>
+                <a class="btn btn-link" href="{% url 'djangoapp:add_review' dealer.id%}">Add Review</a>  
+    
+                
+
             </li>{% url 'djangoapp:dealer_details' dealer.id%}
             {% else %}
             <li>
@@ -68,13 +68,15 @@
     <!-- Add reviews as cards -->
     <main role="main" class="container pt-3">
         
-        {% if dealer_id %}
+        {% if dealer.id %}
         <div class="card-columns">
             {% for review in reviews %}
             
                 <div class="card" >
                     <div class="card-header">
+                        {% if review.sentiment != 'unknown' %}
                         <img class="card-img-left" src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" width="40" height="40">
+                        {% endif %}
                     </div>
                     
                      <div class="card-body text-center">
@@ -104,7 +106,7 @@
                     </div>
                     <div class="card-footer text-center" style="min-height: 74px;">
                         {% if user.is_authenticated %}
-                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a Review!</a>
+                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer.id %}">Write a Review!</a>
                         {% else %}
                             <a class="btn btn-success btn-lg" href="{% url 'djangoapp:signup' %}">Please login to write a review!</a>
                         {% endif %}
@@ -125,7 +127,7 @@
                     </div>
                     <div class="card-footer text-center" style="min-height: 74px;">
                         {% if user.is_authenticated %}
-                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a Review!</a>
+                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer.id %}">Write a Review!</a>
                         {% else %}
                             <p class="btn btn-success nohover">Please login to write a review!</p>
                         {% endif %}
