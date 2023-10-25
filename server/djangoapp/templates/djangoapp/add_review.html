@@ -12,7 +12,7 @@
 </head>
     <body>
         <main role="main" class="d-flex justify-content-center pt-3">
-            <form class="border boder-dark p-4 w-auto h-auto text-center bg-light" action="{% url 'djangoapp:add_review' dealer_id %}" method='post'>
+            <form class="border boder-dark p-4 w-auto h-auto text-center bg-light" action="{% url 'djangoapp:add_review' id %}" method='post'>
                 {% csrf_token %} 
                 <h1 class="text-center"><b>{{dealer_name}}'s review form</b></h1>
                 <br>
